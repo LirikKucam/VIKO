@@ -1,0 +1,3 @@
+C:/Users/Gamer/Desktop/VIKO/cmake-build-debug/CMakeFiles/VIKO.dir
+C:/Users/Gamer/Desktop/VIKO/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Gamer/Desktop/VIKO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
