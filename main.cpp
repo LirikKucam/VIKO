@@ -19,3 +19,26 @@ int main () {
      cin >> valiuta;
 return 0;
     }
+switch (valiuta) {
+    case 1 :
+        pavadinimas = "GBP";
+        bendras = GBP_Bendras;
+        pirkti = GBP_Pirkti;
+        parduoti = GBP_Parduoti;
+        break;
+    case 2 :
+        pavadinimas = "USD";
+        bendras = USD_Bendras;
+        pirkti = USD_Pirkti;
+        parduoti = USD_Parduoti;
+        break;
+    case 3 :
+        pavadinimas = "INR";
+        bendras = INR_Bendras;
+        pirkti = INR_Pirkti;
+        parduoti = INR_Parduoti;
+        break;
+    default :
+        cout << " Neteisingas ivedimas" << endl;
+        return 0;
+}
