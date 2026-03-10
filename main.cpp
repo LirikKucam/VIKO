@@ -63,7 +63,7 @@ int main () {
             cout << pavadinimas;
             cin >> vnt;
             sum = vnt *1. / parduoti;
-            // klaida
+
             cout << "Gausit " << sum << " eur" <<  endl;
         }
         else {
