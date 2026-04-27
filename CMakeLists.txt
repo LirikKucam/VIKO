@@ -3,5 +3,5 @@ project(VIKO)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(VIKO main.cpp)
-#
+add_executable(Uzduotis1 main.cpp)
+add_executable(Uzduotis2 2uzdt/main.cpp)

@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-//valiutos kursas
+
 const float GBP_Bendras   = 0.8729;
 const float GBP_Pirkti    = 0.8600;
 const float GBP_Parduoti  = 0.9220;
