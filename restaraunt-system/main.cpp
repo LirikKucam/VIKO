@@ -55,7 +55,7 @@ void showMenu(const menuItemType menuList[], int itemCount) {
     cout << fixed << setprecision(2);
 
     cout << endl;
-    cout << "Sveiki atvyke i restorana \"Pas Kirila\"" << endl;
+    cout << "Sveiki atvyke i mano  restorana \"Pas Kirila\"" << endl;
     cout << "Pusryciu meniu:" << endl << endl;
 
     for (int i = 0; i < itemCount; i++) {
