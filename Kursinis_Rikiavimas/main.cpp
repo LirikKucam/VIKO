@@ -93,29 +93,50 @@ void mergeSort(vector<int>& arr, int left, int right, Stats& stat) {
 int main() {
 
     vector<int> numbers;
-    Stats stat;
 
     int size = 5000;
 
     srand(time(0));
 
     for(int i = 0; i < size; i++) {
-        numbers.push_back(rand() % 100);
+        numbers.push_back(rand() % 100000);
     }
 
-    auto start = chrono::high_resolution_clock::now();
+    vector<int> insertionData = numbers;
+    vector<int> mergeData = numbers;
 
-    insertionSort(numbers, stat);
+    Stats insertionStat;
+    Stats mergeStat;
 
-    auto end = chrono::high_resolution_clock::now();
+    auto startInsertion = chrono::high_resolution_clock::now();
 
-    auto duration =
-        chrono::duration_cast<chrono::microseconds>(end - start);
+    insertionSort(insertionData, insertionStat);
 
-    cout << "Palyginimai: " << stat.comparisons << endl;
-    cout << "Perkelimai: " << stat.swaps << endl;
-    cout << "Laikas mikrosekundemis: "
-         << duration.count() << endl;
+    auto endInsertion = chrono::high_resolution_clock::now();
+
+    auto insertionTime =
+        chrono::duration_cast<chrono::microseconds>(endInsertion - startInsertion);
+
+    auto startMerge = chrono::high_resolution_clock::now();
+
+    mergeSort(mergeData, 0, mergeData.size() - 1, mergeStat);
+
+    auto endMerge = chrono::high_resolution_clock::now();
+
+    auto mergeTime =
+        chrono::duration_cast<chrono::microseconds>(endMerge - startMerge);
+
+    cout << "Duomenu kiekis: " << size << endl;
+
+    cout << "\n INSERTION SORT \n";
+    cout << "Palyginimai: " << insertionStat.comparisons << endl;
+    cout << "Perkelimai: " << insertionStat.swaps << endl;
+    cout << "Laikas mikrosekundemis: " << insertionTime.count() << endl;
+
+    cout << "\n MERGE SORT \n";
+    cout << "Palyginimai: " << mergeStat.comparisons << endl;
+    cout << "Perkelimai: " << mergeStat.swaps << endl;
+    cout << "Laikas mikrosekundemis: " << mergeTime.count() << endl;
 
     return 0;
 }
