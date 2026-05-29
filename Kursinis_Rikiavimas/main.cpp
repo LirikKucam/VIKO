@@ -36,10 +36,65 @@ void insertionSort(vector<int>& arr, Stats& stat) {
     }
 }
 
+void merge(vector<int>& arr, int left, int mid, int right, Stats& stat) {
+
+    vector<int> temp;
+
+    int i = left;
+    int j = mid + 1;
+
+    while(i <= mid && j <= right) {
+
+        stat.comparisons++;
+
+        if(arr[i] <= arr[j]) {
+            temp.push_back(arr[i]);
+            i++;
+        }
+        else {
+            temp.push_back(arr[j]);
+            j++;
+        }
+
+        stat.swaps++;
+    }
+
+    while(i <= mid) {
+        temp.push_back(arr[i]);
+        i++;
+        stat.swaps++;
+    }
+
+    while(j <= right) {
+        temp.push_back(arr[j]);
+        j++;
+        stat.swaps++;
+    }
+
+    for(int k = 0; k < temp.size(); k++) {
+        arr[left + k] = temp[k];
+    }
+}
+
+void mergeSort(vector<int>& arr, int left, int right, Stats& stat) {
+
+    if(left >= right) {
+        return;
+    }
+
+    int mid = (left + right) / 2;
+
+    mergeSort(arr, left, mid, stat);
+    mergeSort(arr, mid + 1, right, stat);
+
+    merge(arr, left, mid, right, stat);
+}
+
 int main() {
 
     vector<int> numbers;
     Stats stat;
+
     int size = 5000;
 
     srand(time(0));
@@ -48,28 +103,19 @@ int main() {
         numbers.push_back(rand() % 100);
     }
 
-    cout << "Nesurikiuotas masyvas:\n";
-
-    for(int num : numbers) {
-        cout << num << " ";
-    }
-
-    cout << endl;
     auto start = chrono::high_resolution_clock::now();
-    insertionSort(numbers,stat  );
+
+    insertionSort(numbers, stat);
+
     auto end = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
+    auto duration =
+        chrono::duration_cast<chrono::microseconds>(end - start);
 
-    cout << "\nSurikiuotas masyvas:\n";
-
-    for(int num : numbers) {
-        cout << num << " ";
-    }
-
-    cout << endl;
-    cout << "\nPalyginimai: " << stat.comparisons << endl;
+    cout << "Palyginimai: " << stat.comparisons << endl;
     cout << "Perkelimai: " << stat.swaps << endl;
-    cout << "Laikas mikrosekundemis: " << duration.count() << endl;
+    cout << "Laikas mikrosekundemis: "
+         << duration.count() << endl;
+
     return 0;
 }
