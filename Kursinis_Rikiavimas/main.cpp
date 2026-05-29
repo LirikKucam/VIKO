@@ -90,53 +90,79 @@ void mergeSort(vector<int>& arr, int left, int right, Stats& stat) {
     merge(arr, left, mid, right, stat);
 }
 
-int main() {
+void runTest(vector<int> data) {
 
-    vector<int> numbers;
-
-    int size = 5000;
-
-    srand(time(0));
-
-    for(int i = 0; i < size; i++) {
-        numbers.push_back(rand() % 100000);
-    }
-
-    vector<int> insertionData = numbers;
-    vector<int> mergeData = numbers;
+    vector<int> insertionData = data;
+    vector<int> mergeData = data;
 
     Stats insertionStat;
     Stats mergeStat;
 
     auto startInsertion = chrono::high_resolution_clock::now();
-
     insertionSort(insertionData, insertionStat);
-
     auto endInsertion = chrono::high_resolution_clock::now();
 
     auto insertionTime =
-        chrono::duration_cast<chrono::microseconds>(endInsertion - startInsertion);
+        chrono::duration_cast<chrono::microseconds>(
+            endInsertion - startInsertion);
 
     auto startMerge = chrono::high_resolution_clock::now();
-
     mergeSort(mergeData, 0, mergeData.size() - 1, mergeStat);
-
     auto endMerge = chrono::high_resolution_clock::now();
 
     auto mergeTime =
-        chrono::duration_cast<chrono::microseconds>(endMerge - startMerge);
+        chrono::duration_cast<chrono::microseconds>(
+            endMerge - startMerge);
 
-    cout << "Duomenu kiekis: " << size << endl;
-
-    cout << "\n INSERTION SORT \n";
+    cout << "\nINSERTION SORT\n";
     cout << "Palyginimai: " << insertionStat.comparisons << endl;
     cout << "Perkelimai: " << insertionStat.swaps << endl;
-    cout << "Laikas mikrosekundemis: " << insertionTime.count() << endl;
+    cout << "Laikas: " << insertionTime.count() << " mikrosek." << endl;
 
-    cout << "\n MERGE SORT \n";
+    cout << "\nMERGE SORT\n";
     cout << "Palyginimai: " << mergeStat.comparisons << endl;
     cout << "Perkelimai: " << mergeStat.swaps << endl;
-    cout << "Laikas mikrosekundemis: " << mergeTime.count() << endl;
+    cout << "Laikas: " << mergeTime.count() << " mikrosek." << endl;
+}
+
+int main() {
+
+    srand(time(0));
+
+    vector<int> sizes = {5000, 10000, 50000};
+
+    for(int size : sizes) {
+
+        cout << "\n\n";
+        cout << "DUOMENU KIEKIS: " << size << endl;
+
+        vector<int> randomData;
+
+        for(int i = 0; i < size; i++) {
+            randomData.push_back(rand() % 100000);
+        }
+
+        cout << "\n RANDOM DATA \n";
+        runTest(randomData);
+
+        vector<int> sortedData;
+
+        for(int i = 0; i < size; i++) {
+            sortedData.push_back(i);
+        }
+
+        cout << "\n SORTED DATA \n";
+        runTest(sortedData);
+
+        vector<int> reversedData;
+
+        for(int i = size; i > 0; i--) {
+            reversedData.push_back(i);
+        }
+
+        cout << "\nREVERSED DATA \n";
+        runTest(reversedData);
+    }
 
     return 0;
 }
