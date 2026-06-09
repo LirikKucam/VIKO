@@ -28,8 +28,19 @@ int main() {
         return 1;
     }
 
-    showMenu(menuList, itemCount);
-    printCheck(menuList, itemCount);
+    char again;
+
+    do {
+        showMenu(menuList, itemCount);
+        printCheck(menuList, itemCount);
+
+        cout << endl;
+        cout << "Ar norite atlikti dar viena uzsakyma? (t/n): ";
+        cin >> again;
+
+    } while (again == 't' || again == 'T');
+
+    cout << "Aciu, kad apsilankete restorane \"Pas Kirila\"!" << endl;
 
     return 0;
 }
